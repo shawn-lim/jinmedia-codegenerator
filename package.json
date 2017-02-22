@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "CodeGenerator",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A Code Generator tool for Jin Media Inc.",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "git@github.com:shawn-lim/jinmedia-codegenerator.git",
   "keywords": [
     "Electron",
     "quick",
@@ -14,9 +14,12 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Shawnl",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "chokidar": "^1.6.1",
+    "watch": "^1.0.2"
   }
 }

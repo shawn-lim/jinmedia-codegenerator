@@ -6,6 +6,9 @@ const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
+const chokidar = require('chokidar')
+
+var ipcMain = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,6 +17,7 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow.setMenu(null);
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -32,6 +36,10 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  chokidar.watch('.', {ignoreInitial: true, ignored: /(^|[\/\\])\../}).on('add', (path, event) => {
+    mainWindow.webContents.send('new-file', path);
+  });
 }
 
 // This method will be called when Electron has finished
