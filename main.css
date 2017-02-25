@@ -1,7 +1,31 @@
 #codestring {
-  position: fixed;
+  border: solid 1px gray;
+  border-radius: 10px;
+  padding: 20px 100px;
+  background-color: #f1f1f1;
+  font-size: 100px;
+  margin-top: 0;
+  display: none;
+}
+#your-code-is{
+  display: none;
+}
+.logo{
+  width: 200px;
+}
+.center-all{
+  font-family: sans-serif;
+  position:fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: monospace;
+  text-align: center;
+}
+#codecount{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: gray;
+  font-size: 11px;
+  padding: 0 20px;
 }

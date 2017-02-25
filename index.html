@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link href="main.css" type="text/css" rel="stylesheet">
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
   </head>
   <body>
-    <div>
-      <h1 id="codestring">JIN MEDIA INC.</h1>
+    <!--For testing, can be removed-->
+    <div class="testing">
+      <form name="code_form" action="javascript:getCode()">
+        <p>Testing Purposes</p>
+        <input name="code" type="text" placeholder="Enter your code"/>
+        <button type="submit">Go</button>
+      </form>
+      <p id="imageurl"></p>
     </div>
+
+    <!--Main Box-->
+    <div class="center-all">
+      <h3 id="your-code-is">Your image code is</h3>
+      <h1 id="codestring">qnQWNn</h1>
+      <img class="logo" src="./img/jmlogo.png" alt=""/>
+    </div>
+
+    <!--Code Count Box -->
+    <p id="codecount"></p>
   </body>
 
-  <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
-  </script>
 </html>
