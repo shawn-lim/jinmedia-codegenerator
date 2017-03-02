@@ -4,7 +4,8 @@
   "description": "A Code Generator tool for Jin Media Inc.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build_win": "electron-packager . JinMediaCG --platform=win32"
   },
   "repository": "git@github.com:shawn-lim/jinmedia-codegenerator.git",
   "keywords": [
@@ -16,13 +17,12 @@
   ],
   "author": "Shawnl",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "electron-packager": "^8.5.2"
   },
   "dependencies": {
     "chokidar": "^1.6.1",
     "cipher": "0.0.0",
-    "jQuery": "^1.7.4",
-    "smaz": "^1.0.0",
     "watch": "^1.0.2"
   }
 }

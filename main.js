@@ -18,9 +18,13 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow();
+  mainWindow = new BrowserWindow({
+    title: 'JinMediaCG',
+    icon: 'img/jmlogo.png'
+  });
   mainWindow.setMenu(null);
-  mainWindow.setFullScreen(true);
+  //mainWindow.setFullScreen(true);
+  mainWindow.maximize();
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -49,12 +53,12 @@ function createWindow () {
     getCodeMap();
     chokidar.watch(WATCH_DIR, {ignoreInitial: true, ignored: /(^|[\/\\])\../}).on('add', (path, event) => {
       var code = generateCode();
-      path = path.replace(WATCH_DIR+'\\','');
-      code_map[code] = path;
+      var filename = path.replace(WATCH_DIR+'\\','');
+      code_map[code] = filename;
       codes++;
-      mainWindow.webContents.send('new-file', code);
+      mainWindow.webContents.send('new-file', {code: code, path: path});
       mainWindow.webContents.send('code_count', codes);
-      fs.appendFile(CODE_MAP_PATH, code+':'+path+'|');
+      fs.appendFile(CODE_MAP_PATH, code+':'+filename+'|');
     });
 
   });

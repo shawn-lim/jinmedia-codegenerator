@@ -5,10 +5,20 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "test",
+    "tests"
   ],
   "dependencies": {
+    "angular": "^1.6.2",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0"
   },
-  "overrides": {
-  }
+  "overrides": {},
+  "homepage": "https://github.com/shawn-lim/jinmedia-codegenerator",
+  "authors": [
+    "Shawn L <_shawn@outlook.com>"
+  ],
+  "description": "",
+  "license": "MIT"
 }

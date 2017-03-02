@@ -4,21 +4,55 @@
 
 var ipcRenderer = require('electron').ipcRenderer;
 
+angular.module('CodeGenerator', []);
 
-ipcRenderer.on('new-file', function(event, data){
-  document.getElementById('your-code-is').style.display = 'block';
-  document.getElementById('codestring').style.display = 'block';
-  document.getElementById('codestring').innerHTML = data;
-});
-ipcRenderer.on('code_count', function(event, data){
-  document.getElementById('codecount').innerHTML = 'Codes: ' + data;
-});
+angular.module('CodeGenerator')
+  .controller('MainCtrl', function($scope, $timeout){
 
-ipcRenderer.on('image-url', function(event, data){
-  document.getElementById('imageurl').innerHTML = 'URL: ' + data;
-});
+    var vm = this;
+    angular.extend(vm, {
+      codes: [],
+      code_history_toggle: false,
+      current_code: null,
+      code_count: null,
+      image_url: null,
 
-global.getCode = function(){
-  var code = document.code_form.code.value;
-  ipcRenderer.send('get-image', code);
-};
+      getCode: function(){
+        var code = document.code_form.code.value;
+        ipcRenderer.send('get-image', code);
+      }
+    });
+
+    ipcRenderer.on('new-file', function(event, data){
+      $timeout(function(){
+        vm.current_code = data.code;
+        if(vm.codes.length > 2){
+          vm.codes.shift();
+        }
+        vm.codes.push(data);
+      })
+    });
+    ipcRenderer.on('code_count', function(event, data){
+      $timeout(function(){
+        vm.code_count = data;
+      });
+    });
+
+    ipcRenderer.on('image-url', function(event, data){
+      $timeout(function(){
+        vm.image_url = data;
+      });
+    });
+
+  });
+
+
+document.addEventListener('dragover',function(event){
+  event.preventDefault();
+  return false;
+},false);
+
+document.addEventListener('drop',function(event){
+  event.preventDefault();
+  return false;
+},false);

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="CodeGenerator">
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>JinMedia Code Generator</title>
     <link href="main.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet">
     <script>
       // You can also require other files to run in this process
+      require('./bower_components/angular/angular.js')
       require('./renderer.js')
     </script>
   </head>
-  <body>
+  <body ng-controller="MainCtrl as vm">
     <!--For testing, can be removed-->
     <div class="testing">
-      <form name="code_form" action="javascript:getCode()">
+      <form name="code_form" ng-submit="vm.getCode()">
         <p>Testing Purposes</p>
         <input name="code" type="text" placeholder="Enter your code"/>
         <button type="submit">Go</button>
@@ -20,15 +23,32 @@
       <p id="imageurl"></p>
     </div>
 
+    <!--Code History-->
+    <div class="code-history-container" ng-class="{'active':vm.code_history_toggle}">
+      <div class="content">
+        <div class="codes" ng-repeat="code in vm.codes">
+          <a href="#" ng-click="vm.current_code = code.code">{{code.code}}</a>
+          <img class="preview" src="{{code.path}}" alt="">
+        </div>
+      </div>
+      <a href="#" ng-click="vm.code_history_toggle = !vm.code_history_toggle">
+        <div class="container-button">
+          <i class="fa" ng-class="vm.code_history_toggle ? 'fa-caret-left' : 'fa-caret-right'"></i>
+        </div>
+      </a>
+    </div>
+
     <!--Main Box-->
     <div class="center-all">
-      <h3 id="your-code-is">Your image code is</h3>
-      <h1 id="codestring">qnQWNn</h1>
+      <h3 ng-if="vm.current_code">Your image code is</h3>
+      <h1 class="codestring" ng-if="vm.current_code">{{ vm.current_code }}</h1>
+      <div>
+        <input class="special" type="text" placeholder="Your URL here">
+      </div>
       <img class="logo" src="./img/jmlogo.png" alt=""/>
     </div>
 
     <!--Code Count Box -->
-    <p id="codecount"></p>
+    <p class="codecount">Code: {{ vm.code_count }}</p>
   </body>
-
 </html>
